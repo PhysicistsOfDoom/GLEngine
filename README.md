@@ -11,7 +11,7 @@ The goal is to simulate Gravity, Bouncing, Intertia and all sorts of natural wor
 ### Data Analysis
 * **Scientific Method Application:** Eventual Exportation of simulation logs to **CSV** and used **Python (Matplotlib)** to visualize performance. 
 
-![Simulation Image](res/media/physics_testing.png)
+![Simulation Image](physicsEngine/res/media/physics_testing.png)
 
 
 ### Download
