@@ -133,17 +133,26 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\glad.c" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="vendor\glad.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="buffer.h" />
-    <ClInclude Include="include\glad\glad.h" />
-    <ClInclude Include="include\KHR\khrplatform.h" />
-    <ClInclude Include="shader.h" />
+    <ClInclude Include="src\graphics\buffer.h" />
+    <ClInclude Include="src\graphics\shader.h" />
+    <ClInclude Include="vendor\glad\glad.h" />
+    <ClInclude Include="vendor\GLFW\glfw3.h" />
+    <ClInclude Include="vendor\GLFW\glfw3native.h" />
+    <ClInclude Include="vendor\KHR\khrplatform.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.gitignore" />
+    <None Include="vendor\glm\.gitignore" />
+    <None Include="vendor\glm\manual.md" />
+    <None Include="vendor\glm\readme.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="vendor\glm\CMakeLists.txt" />
+    <Text Include="vendor\glm\copying.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

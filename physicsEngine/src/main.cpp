@@ -4,8 +4,8 @@
 #include <glm/gtc/matrix_access.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <iostream>
-#include "../buffer.h"
-#include "../shader.h"
+#include "./graphics/buffer.h"
+#include "./graphics/shader.h"
 
 // Vertex Shader
 const char* vertexShaderCode = "#version 330 core\n"
