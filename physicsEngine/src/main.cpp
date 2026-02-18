@@ -12,11 +12,11 @@ const char* vertexShaderCode = "#version 330 core\n"
 "layout(location = 0) in vec3 inPosition;\n"
 "layout(location = 1) in vec3 inColor;\n"
 "out vec4 outColor;\n"
-"uniform mat4 model;\n" // <--- THE NEW UNIFORM
+"uniform mat4 model;\n" 
 "uniform mat4 view;\n"
 "uniform mat4 projection;\n"
 "void main() {\n"
-"	gl_Position = projection * view * model * vec4(inPosition, 1.0f);\n" // <--- MULTIPLY HERE
+"	gl_Position = projection * view * model * vec4(inPosition, 1.0f);\n" 
 "	outColor = vec4(inColor, 1.0f);\n"
 "};\n";
 
@@ -40,9 +40,9 @@ float playerVelocityY = 0.0f;
 bool isGrounded = true;
 
 // Mouse Movement
-float yaw = -90.0f; // Start facing toward -Z
+float yaw = -90.0f; 
 float pitch = 0.0f;
-float lastX = 400, lastY = 350; // Middle of your 800x700 window
+float lastX = 400, lastY = 350; 
 bool firstMouse = true;
 void mouse_callback(GLFWwindow* window, double xposIn, double yposIn) {
 	float xpos = static_cast<float>(xposIn);
@@ -55,7 +55,7 @@ void mouse_callback(GLFWwindow* window, double xposIn, double yposIn) {
 	}
 
 	float xoffset = xpos - lastX;
-	float yoffset = lastY - ypos; // reversed since y-coordinates go from bottom to top
+	float yoffset = lastY - ypos; 
 	lastX = xpos;
 	lastY = ypos;
 
@@ -66,11 +66,11 @@ void mouse_callback(GLFWwindow* window, double xposIn, double yposIn) {
 	yaw += xoffset;
 	pitch += yoffset;
 
-	// Constrain the pitch so you don't flip your head over
+	// Camera so the head doesn't flip over like a whale
 	if (pitch > 89.0f)  pitch = 89.0f;
 	if (pitch < -89.0f) pitch = -89.0f;
 
-	// Convert angles to a Direction Vector
+	// Angels -> Direction Vector
 	glm::vec3 front;
 	front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
 	front.y = sin(glm::radians(pitch));
@@ -160,12 +160,12 @@ int main(void)
 	float ballY = 5.0f;
 	float velocityY = 0.0f;
 
-	// Matrix Locations
+	// Matrix Locations inside of the shader program
 	unsigned int modelLoc = glGetUniformLocation(myShader.ID, "model");
 	unsigned int viewLoc = glGetUniformLocation(myShader.ID, "view");
 	unsigned int projectionLoc = glGetUniformLocation(myShader.ID, "projection");
 
-	// Game Loop while window is open
+	// GAME LOOP
 	while (!glfwWindowShouldClose(window))
 	{
 		// TIMING
@@ -176,16 +176,15 @@ int main(void)
 		// I/O
 		glm::vec3 walkFront = glm::normalize(glm::vec3(cameraFront.x, 0.0f, cameraFront.z));
 		float cameraSpeed = 2.5f * deltaTime;
-		playerVelocityY -= 9.8f * deltaTime; // Player Gravity
-		cameraPos.y += playerVelocityY * deltaTime; // Player Gravity
-
-		if (cameraPos.y <= 1.0f) { // Floor level for the camera
+		playerVelocityY -= 9.8f * deltaTime; 
+		cameraPos.y += playerVelocityY * deltaTime; 
+		if (cameraPos.y <= 1.0f) { 
 			cameraPos.y = 1.0f;
 			playerVelocityY = 0.0f;
 			isGrounded = true;
 		}
 
-		// Jump!
+		// JUMP Mechanics
 		if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS && isGrounded) {
 			playerVelocityY = 5.0f;
 			isGrounded = false;
@@ -210,15 +209,15 @@ int main(void)
 		}
 		glfwPollEvents();
 
-		// PHYSICS LOGIC
-		velocityY -= 9.8f * deltaTime; // Gravity
+		// PHYSICS LOGIC 
+		velocityY -= 9.8f * deltaTime; // Gravity ofc is 9.8/ms^2
 		ballY += velocityY * deltaTime;
-		if (ballY < 0.5f) { // Collision with ground (assuming ball/cube size)
+		if (ballY < 0.5f) { 
 			ballY = 0.5f;
-			velocityY *= -0.8f; // Bounce!
+			velocityY *= -0.8f; // Upwards velocity multiplied for a slight bounce..
 		}
 
-		// 4. RENDERING 
+		// CLEAR
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		myShader.use();
 
@@ -242,10 +241,10 @@ int main(void)
 
 		// DRAW RED BOX
 		glm::mat4 ballModel = glm::mat4(1.0f);
-		ballModel = glm::translate(ballModel, glm::vec3(0.0f, ballY, -5.0f)); // Move it forward so we can see it
+		ballModel = glm::translate(ballModel, glm::vec3(0.0f, ballY, -5.0f)); 
 		// No scaling because cube is already a 1x1
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(ballModel));
-		glDrawArrays(GL_TRIANGLES, 0, 36); // Draw the same geometry, but moved!
+		glDrawArrays(GL_TRIANGLES, 0, 36); 
 
 		// Swap Back -> Front Buffer
 		glfwSwapBuffers(window);

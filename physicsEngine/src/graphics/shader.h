@@ -4,7 +4,6 @@
 #include <glad/glad.h>
 #include <iostream>
 
-
 class Shader {
 public:
 	unsigned int ID;

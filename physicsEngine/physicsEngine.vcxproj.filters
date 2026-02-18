@@ -47,9 +47,15 @@
     <None Include="vendor\glm\.gitignore" />
     <None Include="vendor\glm\manual.md" />
     <None Include="vendor\glm\readme.md" />
+    <None Include="..\README.md" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="vendor\glm\CMakeLists.txt" />
     <Text Include="vendor\glm\copying.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\media\physics_testing.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
