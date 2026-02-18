@@ -1,0 +1,14 @@
+bin/
+obj/
+x64/
+x86/
+Debug/
+Release/
+.vs/
+.git/
+*.user
+*.aps
+*.opendb
+*.pdb
+*.ilk
+*.exe
